@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Animated, PanResponder } from 'react-native';
 
-class Card extends Component {
+class SmallCard extends Component {
   constructor(props) {
     super(props);
 
@@ -37,10 +37,7 @@ class Card extends Component {
         {...this.panResponder.panHandlers}
         style={this.position.getLayout()}
       >
-        <View style={styles.ball}>
-          {this.props.children}
-        </View>
-
+        <View style={styles.ball}></View>
       </Animated.View>
     );
   }
@@ -48,12 +45,12 @@ class Card extends Component {
 
 const styles = {
   ball: {
-    height: 60,
-    width: 60,
+    height: 30,
+    width: 30,
     //borderRadius: 30,
-    borderWidth: 30,
-    borderColor: 'black'
+    borderWidth: 15,
+    borderColor: 'white'
   }
 }
 
-export default Card;
+export default SmallCard;

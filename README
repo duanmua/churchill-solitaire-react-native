@@ -1,0 +1,28 @@
+10 lanes
+Lane State:
+  * Array of array of objects:
+    {
+      card,
+      suit,
+      color,
+      shown,
+      draggable
+    }
+
+On pan:
+  * Animate drag
+  * On pan stop, fire an action containing the ending points
+    {
+      type: cardmove,
+      endX:,
+      endY:,
+      startingLane:,
+      cards: []
+    }
+  * Reducer calculates which lane matches
+  * Switch to appropriate lane if legal movement
+    - Otherwise return to start
+    - Use componentWillUpdate() {
+            LayoutAnimation.spring();
+          }
+    - Update draggable property on other cards as appropriate
