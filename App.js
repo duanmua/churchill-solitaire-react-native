@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Card from './src/Card';
-import SmallCard from './src/SmallCard';
 
 export default class App extends React.Component {
   render() {
@@ -11,7 +10,7 @@ export default class App extends React.Component {
         <Card />
         <Card />
         <Card>
-          <SmallCard />
+          <Card />
         </Card>
         <Card />
         <Card />
