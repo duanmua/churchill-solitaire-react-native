@@ -53,7 +53,8 @@ const styles = {
     width: 40,
     //borderRadius: 30,
     borderWidth: 2,
-    borderColor: 'black'
+    borderColor: 'black',
+    backgroundColor: 'green'
   }
 }
 
