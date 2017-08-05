@@ -6,22 +6,31 @@ import Card from './Card';
 
 class Board extends React.Component {
   getLane(cards) {
-    var cardJSX = null;
-    cards.forEach(() => {
-      cardJSX = (
-        <Card>
-          { cardJSX }
+    var laneJSX = null;
+    cards.forEach((card) => {
+      laneJSX = (
+        <Card
+          key={ card.id }
+          cardMoved={ this.props.cardMoved }
+          cardId={ card.id }
+          value={ card.value }
+          suit={ card.suit }
+          color={ card.color }
+          shown={ card.shown }
+          draggable={ card.draggable }
+        >
+          { laneJSX }
         </Card>
       );
     })
-    return cardJSX;
+    return laneJSX;
   }
 
   render() {
     return (
       <View style={styles.container}>
         {
-          this.props.lanes.map(this.getLane)
+          this.props.lanes.map(this.getLane, this)
         }
       </View>
     );
@@ -33,6 +42,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    top: 20,
     //alignItems: 'center',
     justifyContent: 'space-around',
     flexDirection: 'row'

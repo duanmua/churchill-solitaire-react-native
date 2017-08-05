@@ -1,23 +1,30 @@
 import React, { Component } from 'react';
-import { View, Animated, PanResponder } from 'react-native';
+import { View, Animated, PanResponder, Text } from 'react-native';
 
 class Card extends Component {
   constructor(props) {
     super(props);
 
     const position = new Animated.ValueXY();
+    const { cardMoved, cardId, draggable } = this.props;
 
     const panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (event, gesture) => {
         //console.log(gesture);
-        return true;
+        return draggable;
       },
       onPanResponderMove: (event, gesture) => {
         position.setValue({ x: gesture.dx, y: gesture.dy });
         //console.log(gesture);
       },
-      onPanResponderRelease: () => {
-          //this.resetPosition();
+      onPanResponderRelease: (event, gesture) => {
+        console.log(event);
+        cardMoved({
+          endX: event.moveX,
+          endY: event.moveY,
+          cardId: cardId
+        });
+        //this.resetPosition();
       }
     });
 
@@ -37,7 +44,9 @@ class Card extends Component {
         {...this.panResponder.panHandlers}
         style={this.position.getLayout()}
       >
-        <View style={styles.ball}></View>
+        <View style={styles.card}>
+          <Text style={{ color: this.props.color }}>{this.props.value} {this.props.suit}</Text>
+        </View>
         <View style={{ top: -35 }}>
           {this.props.children}
         </View>
@@ -48,7 +57,7 @@ class Card extends Component {
 }
 
 const styles = {
-  ball: {
+  card: {
     height: 60,
     width: 40,
     //borderRadius: 30,

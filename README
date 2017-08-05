@@ -16,8 +16,7 @@ On pan:
       type: cardmove,
       endX:,
       endY:,
-      startingLane:,
-      cards: []
+      id:
     }
   * Reducer calculates which lane matches
   * Switch to appropriate lane if legal movement

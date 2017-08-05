@@ -5,16 +5,14 @@ import {
 export const cardMoved = ({
   endX,
   endY,
-  startingLane,
-  cards
+  cardId
 }) => {
   return {
     type: CARD_MOVED,
     payload: {
       endX,
       endY,
-      startingLane,
-      cards
+      cardId
     }
   };
 };

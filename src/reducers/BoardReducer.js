@@ -2,56 +2,72 @@ import {
   CARD_MOVED
 } from '../actions/types';
 
+import {
+  SPADES,
+  HEARTS,
+  DIAMONDS,
+  CLUBS,
+  BLACK,
+  RED
+} from '../CardTypes';
+
 const INITIAL_STATE = {
   lanes: [
     [{
-      card: '4',
-      suit: 'spades',
-      color: 'black',
+      id: 1,
+      value: '4',
+      suit: SPADES,
+      color: BLACK,
       shown: true,
       draggable: true
     }],
     [{
-      card: '5',
-      suit: 'spades',
-      color: 'black',
+      id: 2,
+      value: '5',
+      suit: SPADES,
+      color: BLACK,
       shown: true,
       draggable: true
     }],
     [{
-      card: '5',
-      suit: 'spades',
-      color: 'black',
+      id: 3,
+      value: '5',
+      suit: SPADES,
+      color: BLACK,
       shown: true,
       draggable: true
     }],
     [
       {
-        card: '5',
-        suit: 'spades',
-        color: 'black',
+        id: 4,
+        value: 'Q',
+        suit: DIAMONDS,
+        color: RED,
         shown: false,
         draggable: false
       },
       {
-        card: '5',
-        suit: 'spades',
-        color: 'black',
+        id: 5,
+        value: '5',
+        suit: SPADES,
+        color: BLACK,
         shown: true,
         draggable: true
       }
     ],
     [{
-      card: '5',
-      suit: 'spades',
-      color: 'black',
+      id: 6,
+      value: '5',
+      suit: SPADES,
+      color: BLACK,
       shown: true,
       draggable: true
     }],
     [{
-      card: '5',
-      suit: 'spades',
-      color: 'black',
+      id: 7,
+      value: 'A',
+      suit: HEARTS,
+      color: RED,
       shown: true,
       draggable: true
     }]
