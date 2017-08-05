@@ -37,7 +37,8 @@ class Card extends Component {
         {...this.panResponder.panHandlers}
         style={this.position.getLayout()}
       >
-        <View style={styles.ball}>
+        <View style={styles.ball}></View>
+        <View style={{ top: -35 }}>
           {this.props.children}
         </View>
 
@@ -49,7 +50,7 @@ class Card extends Component {
 const styles = {
   ball: {
     height: 60,
-    width: 60,
+    width: 40,
     //borderRadius: 30,
     borderWidth: 2,
     borderColor: 'black'
