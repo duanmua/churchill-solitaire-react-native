@@ -1,3 +1,5 @@
+import update from 'immutability-helper';
+
 import {
   CARD_MOVED
 } from '../actions/types';
@@ -44,7 +46,7 @@ const INITIAL_STATE = {
         suit: DIAMONDS,
         color: RED,
         shown: false,
-        draggable: false
+        draggable: true
       },
       {
         id: 5,
@@ -52,7 +54,7 @@ const INITIAL_STATE = {
         suit: SPADES,
         color: BLACK,
         shown: true,
-        draggable: true
+        draggable: false
       }
     ],
     [{
@@ -77,8 +79,17 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case CARD_MOVED:
-
-      return state;
+      return update(state, {lanes: {
+                              3: {$unset: [0]},
+                              2: {$unshift: [{
+                                id: 4,
+                                value: 'Q',
+                                suit: DIAMONDS,
+                                color: RED,
+                                shown: false,
+                                draggable: true
+                              }]}
+                            }});
     default:
       return state;
   }

@@ -18,7 +18,6 @@ class Card extends Component {
         //console.log(gesture);
       },
       onPanResponderRelease: (event, gesture) => {
-        console.log(event);
         cardMoved({
           endX: event.moveX,
           endY: event.moveY,

@@ -7,6 +7,7 @@ export const cardMoved = ({
   endY,
   cardId
 }) => {
+  console.log("cardMoved called");
   return {
     type: CARD_MOVED,
     payload: {
