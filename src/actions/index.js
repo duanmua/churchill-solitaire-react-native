@@ -5,7 +5,9 @@ import {
 export const cardMoved = ({
   endX,
   endY,
-  cardId
+  cardId,
+  lane,
+  index
 }) => {
   console.log("cardMoved called");
   return {
@@ -13,7 +15,9 @@ export const cardMoved = ({
     payload: {
       endX,
       endY,
-      cardId
+      cardId,
+      lane,
+      index
     }
   };
 };

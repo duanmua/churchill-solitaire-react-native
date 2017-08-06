@@ -5,9 +5,9 @@ import { cardMoved } from '../actions';
 import Card from './Card';
 
 class Board extends React.Component {
-  getLane(cards) {
+  getLane(cards, lane) {
     var laneJSX = null;
-    cards.forEach((card) => {
+    cards.forEach((card, index) => {
       laneJSX = (
         <Card
           key={ card.id }
@@ -18,6 +18,8 @@ class Board extends React.Component {
           color={ card.color }
           shown={ card.shown }
           draggable={ card.draggable }
+          lane={ lane }
+          index={ index }
         >
           { laneJSX }
         </Card>

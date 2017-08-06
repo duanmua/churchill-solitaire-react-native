@@ -79,16 +79,11 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case CARD_MOVED:
+      const { lane, index } = action.payload;
+      const card = state.lanes[lane][index];
       return update(state, {lanes: {
-                              3: {$unset: [0]},
-                              2: {$unshift: [{
-                                id: 4,
-                                value: 'Q',
-                                suit: DIAMONDS,
-                                color: RED,
-                                shown: false,
-                                draggable: true
-                              }]}
+                              [lane]: {$unset: [index]},
+                              2: {$unshift: [card]}
                             }});
     default:
       return state;
