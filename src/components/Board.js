@@ -8,9 +8,10 @@ class Board extends React.Component {
   getLane(cards, lane) {
     var laneJSX = null;
     cards.forEach((card, index) => {
+      const key = "cardID: " + card.id + " lane: " + lane + " index: " + index;
       laneJSX = (
         <Card
-          key={ card.id }
+          key={ key }
           cardMoved={ this.props.cardMoved }
           cardId={ card.id }
           value={ card.value }

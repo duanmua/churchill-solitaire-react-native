@@ -41,6 +41,22 @@ const INITIAL_STATE = {
     }],
     [
       {
+        id: 8,
+        value: '2',
+        suit: DIAMONDS,
+        color: RED,
+        shown: false,
+        draggable: true
+      },
+      {
+        id: 9,
+        value: '3',
+        suit: DIAMONDS,
+        color: RED,
+        shown: false,
+        draggable: true
+      },
+      {
         id: 4,
         value: 'Q',
         suit: DIAMONDS,
@@ -76,14 +92,16 @@ const INITIAL_STATE = {
   ]
 };
 
+const MAX_LENGTH = 99999;
+
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case CARD_MOVED:
       const { lane, index } = action.payload;
-      const card = state.lanes[lane][index];
+      const cards = state.lanes[lane].slice(0, index+1);
       return update(state, {lanes: {
-                              [lane]: {$unset: [index]},
-                              2: {$unshift: [card]}
+                              [lane]: {$splice: [[0, index+1]]},
+                              2: {$unshift: cards}
                             }});
     default:
       return state;
