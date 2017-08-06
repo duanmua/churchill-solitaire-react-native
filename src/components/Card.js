@@ -18,6 +18,7 @@ class Card extends Component {
         //console.log(gesture);
       },
       onPanResponderRelease: (event, gesture) => {
+        this.resetPosition();
         cardMoved({
           endX: event.moveX,
           endY: event.moveY,
@@ -25,7 +26,6 @@ class Card extends Component {
           lane: lane,
           index: index
         });
-        //this.resetPosition();
       }
     });
 
