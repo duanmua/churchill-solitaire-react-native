@@ -13,84 +13,46 @@ import {
   RED
 } from '../CardTypes';
 
-const INITIAL_STATE = {
-  lanes: [
-    [{
-      id: 1,
-      value: '4',
-      suit: SPADES,
-      color: BLACK,
-      shown: true,
-      draggable: true
-    }],
-    [{
-      id: 2,
-      value: '5',
-      suit: SPADES,
-      color: BLACK,
-      shown: true,
-      draggable: true
-    }],
-    [{
-      id: 3,
-      value: '5',
-      suit: SPADES,
-      color: BLACK,
-      shown: true,
-      draggable: true
-    }],
-    [
-      {
-        id: 8,
-        value: '2',
-        suit: DIAMONDS,
-        color: RED,
+const shuffle = (array) => {
+  var i = 0
+    , j = 0
+    , temp = null;
+
+  for (i = array.length - 1; i > 0; i -= 1) {
+    j = Math.floor(Math.random() * (i + 1));
+    temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+}
+
+const INITIAL_STATE = (() => {
+  var board = {};
+  board.deck = [];
+  var i = 0;
+  [SPADES, HEARTS, DIAMONDS, CLUBS].forEach((suit) => {
+    ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'].forEach((value) => {
+      board.deck.push({
+        id: i,
+        value: value,
+        suit: suit,
+        color: suit === SPADES || suit === CLUBS ? BLACK : RED,
         shown: false,
-        draggable: true
-      },
-      {
-        id: 9,
-        value: '3',
-        suit: DIAMONDS,
-        color: RED,
-        shown: false,
-        draggable: true
-      },
-      {
-        id: 4,
-        value: 'Q',
-        suit: DIAMONDS,
-        color: RED,
-        shown: false,
-        draggable: true
-      },
-      {
-        id: 5,
-        value: '5',
-        suit: SPADES,
-        color: BLACK,
-        shown: true,
         draggable: false
-      }
-    ],
-    [{
-      id: 6,
-      value: '5',
-      suit: SPADES,
-      color: BLACK,
-      shown: true,
-      draggable: true
-    }],
-    [{
-      id: 7,
-      value: 'A',
-      suit: HEARTS,
-      color: RED,
-      shown: true,
-      draggable: true
-    }]
-  ]
-};
+      })
+    });
+  });
+  shuffle(board.deck);
+  board.lanes = Array(6).fill().map((_, i) => {
+    var lane = [board.deck.shift(),board.deck.shift(),board.deck.shift()];
+    lane.forEach((val) => {
+      val.shown = true;
+      val.draggable = true;
+    });
+    return lane;
+  });
+  return board;
+})();
 
 const MAX_LENGTH = 99999;
 
