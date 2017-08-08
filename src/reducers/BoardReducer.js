@@ -66,6 +66,9 @@ export default (state = INITIAL_STATE, action) => {
       const { lane, index, endX } = action.payload;
       const cards = state.lanes[lane].slice(0, index+1);
       const target = Math.floor(endX / (SCREEN_WIDTH / 6));
+      if (lane === target) {
+        return state;
+      }
       return update(state, {lanes: {
                               [lane]: {$splice: [[0, index+1]]},
                               [target]: {$unshift: cards}
