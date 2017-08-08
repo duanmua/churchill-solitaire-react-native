@@ -26,7 +26,11 @@ class Board extends React.Component {
         </Card>
       );
     })
-    return laneJSX;
+    return (
+      <View style={styles.lane} key={ lane }>
+        { laneJSX }
+      </View>
+    );
   }
 
   render() {
@@ -50,6 +54,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     flexDirection: 'row'
   },
+  lane: {
+    width: 40,
+    height: 60,
+    borderRadius: 3,
+    borderWidth: 1,
+    borderColor: 'black',
+  }
 });
 
 // ownProps IS this.props
