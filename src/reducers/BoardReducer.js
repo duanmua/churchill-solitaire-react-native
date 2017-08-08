@@ -13,6 +13,10 @@ import {
   RED
 } from '../CardTypes';
 
+import { Dimensions } from 'react-native';
+
+const SCREEN_WIDTH = Dimensions.get('window').width;
+
 const shuffle = (array) => {
   var i = 0
     , j = 0
@@ -59,11 +63,12 @@ const MAX_LENGTH = 99999;
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case CARD_MOVED:
-      const { lane, index } = action.payload;
+      const { lane, index, endX } = action.payload;
       const cards = state.lanes[lane].slice(0, index+1);
+      const target = Math.floor(endX / (SCREEN_WIDTH / 6));
       return update(state, {lanes: {
                               [lane]: {$splice: [[0, index+1]]},
-                              2: {$unshift: cards}
+                              [target]: {$unshift: cards}
                             }});
     default:
       return state;

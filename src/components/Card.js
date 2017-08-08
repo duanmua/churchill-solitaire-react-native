@@ -20,8 +20,8 @@ class Card extends Component {
       onPanResponderRelease: (event, gesture) => {
         this.resetPosition();
         cardMoved({
-          endX: event.moveX,
-          endY: event.moveY,
+          endX: gesture.moveX,
+          endY: gesture.moveY,
           cardId: cardId,
           lane: lane,
           index: index
