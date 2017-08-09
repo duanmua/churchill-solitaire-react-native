@@ -39,6 +39,13 @@ class Card extends Component {
     }).start();
   }
 
+  getCardText() {
+    if (this.props.shown === false) {
+      return null;
+    }
+    return (<Text style={{ color: this.props.color }}>{this.props.value} {this.props.suit}</Text>);
+  }
+
   render() {
     return (
       <Animated.View
@@ -46,7 +53,7 @@ class Card extends Component {
         style={this.position.getLayout()}
       >
         <View style={styles.card}>
-          <Text style={{ color: this.props.color }}>{this.props.value} {this.props.suit}</Text>
+          {this.getCardText()}
         </View>
         <View style={{ top: -35 }}>
           {this.props.children}

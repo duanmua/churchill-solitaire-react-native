@@ -26,11 +26,9 @@ const shuffle = (array) => {
     array[i] = array[j];
     array[j] = temp;
   }
-}
+};
 
-const INITIAL_STATE = (() => {
-  var board = {};
-  board.deck = [];
+const populate = (board) => {
   var i = 0;
   [SPADES, HEARTS, DIAMONDS, CLUBS].forEach((suit) => {
     ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'].forEach((value) => {
@@ -44,15 +42,36 @@ const INITIAL_STATE = (() => {
       })
     });
   });
-  shuffle(board.deck);
-  board.lanes = Array(10).fill().map((_, i) => {
-    var lane = [board.deck.shift(),board.deck.shift(),board.deck.shift()];
-    lane.forEach((val) => {
-      val.shown = true;
-      val.draggable = true;
-    });
-    return lane;
+};
+
+const dealLaneOfDepth = (num, deck) => {
+  return Array(num).fill().map((_, i) => {
+    var card = deck.shift();
+    if (i===0) {
+      card.shown = true;
+      card.draggable = true;
+    }
+    return card;
   });
+};
+
+const dealLanes = (board) => {
+  var lanes = [];
+  for (i = 1; i<=5; i++) {
+    lanes.push(dealLaneOfDepth(i, board.deck));
+  }
+  for (j = 5; j>0; j--) {
+    lanes.push(dealLaneOfDepth(j, board.deck));
+  }
+  return lanes;
+};
+
+const INITIAL_STATE = (() => {
+  var board = {};
+  board.deck = [];
+  populate(board);
+  shuffle(board.deck);
+  board.lanes = dealLanes(board);
   return board;
 })();
 
