@@ -43,7 +43,14 @@ class Card extends Component {
     if (this.props.shown === false) {
       return null;
     }
-    return (<Text style={{ color: this.props.color }}>{this.props.value} {this.props.suit}</Text>);
+
+    return (
+      <Text
+        style={ {color: this.props.color, ...styles.text} }
+      >
+        {this.props.value} {this.props.suit}
+      </Text>
+    );
   }
 
   render() {
@@ -55,7 +62,7 @@ class Card extends Component {
         <View style={styles.card}>
           {this.getCardText()}
         </View>
-        <View style={{ top: -35 }}>
+        <View style={{ top: -45 }}>
           {this.props.children}
         </View>
 
@@ -70,7 +77,11 @@ const styles = {
     //borderRadius: 30,
     borderWidth: 2,
     borderColor: 'black',
-    backgroundColor: 'green'
+    backgroundColor: 'white'
+  },
+  text: {
+    //color: this.props.color,
+    fontSize: 10
   }
 }
 
