@@ -60,7 +60,6 @@ class Card extends Component {
 const styles = {
   card: {
     height: 60,
-    width: 40,
     //borderRadius: 30,
     borderWidth: 2,
     borderColor: 'black',

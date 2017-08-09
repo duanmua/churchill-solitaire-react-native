@@ -13,9 +13,7 @@ import {
   RED
 } from '../CardTypes';
 
-import { Dimensions } from 'react-native';
-
-const SCREEN_WIDTH = Dimensions.get('window').width;
+import { SCREEN_WIDTH } from '../LayoutConstants';
 
 const shuffle = (array) => {
   var i = 0
@@ -47,7 +45,7 @@ const INITIAL_STATE = (() => {
     });
   });
   shuffle(board.deck);
-  board.lanes = Array(6).fill().map((_, i) => {
+  board.lanes = Array(10).fill().map((_, i) => {
     var lane = [board.deck.shift(),board.deck.shift(),board.deck.shift()];
     lane.forEach((val) => {
       val.shown = true;
@@ -65,7 +63,7 @@ export default (state = INITIAL_STATE, action) => {
     case CARD_MOVED:
       const { lane, index, endX } = action.payload;
       const cards = state.lanes[lane].slice(0, index+1);
-      const target = Math.floor(endX / (SCREEN_WIDTH / 6));
+      const target = Math.floor(endX / (SCREEN_WIDTH / 10));
       if (lane === target) {
         return state;
       }

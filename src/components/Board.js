@@ -27,8 +27,12 @@ class Board extends React.Component {
       );
     })
     return (
-      <View style={styles.lane} key={ lane }>
-        { laneJSX }
+      <View style={{ flexDirection: 'row', flex: 1 }} key={ lane }>
+        <View style={{ flex: 1 }} />
+        <View style={ styles.lane }>
+          { laneJSX }
+        </View>
+        <View style={{ flex: 1 }} />
       </View>
     );
   }
@@ -50,12 +54,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     top: 20,
-    //alignItems: 'center',
     justifyContent: 'space-around',
     flexDirection: 'row'
   },
   lane: {
-    width: 40,
+    flex: 20,
     height: 60,
     borderRadius: 3,
     borderWidth: 1,
