@@ -39,17 +39,18 @@ class Card extends Component {
     }).start();
   }
 
-  getCardText() {
-    if (this.props.shown === false) {
-      return null;
-    }
-
+  getCardView() {
+    const { shown, value, suit, color } = this.props;
+    let backgroundColor = shown ? 'white':'grey';
+    let display = shown ? '':'none';
     return (
-      <Text
-        style={ {color: this.props.color, ...styles.text} }
-      >
-        {this.props.value} {this.props.suit}
-      </Text>
+      <View style={{backgroundColor,  ...styles.card}}>
+        <Text
+          style={ {display, color, ...styles.text} }
+        >
+          {value} {suit}
+        </Text>
+      </View>
     );
   }
 
@@ -59,9 +60,7 @@ class Card extends Component {
         {...this.panResponder.panHandlers}
         style={this.position.getLayout()}
       >
-        <View style={styles.card}>
-          {this.getCardText()}
-        </View>
+        {this.getCardView()}
         <View style={{ top: -45 }}>
           {this.props.children}
         </View>
@@ -74,10 +73,9 @@ class Card extends Component {
 const styles = {
   card: {
     height: 60,
-    //borderRadius: 30,
-    borderWidth: 2,
-    borderColor: 'black',
-    backgroundColor: 'white'
+    borderRadius: 3,
+    borderWidth: 1,
+    borderColor: 'black'
   },
   text: {
     //color: this.props.color,

@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     flex: 20,
     height: 60,
     borderRadius: 3,
-    borderWidth: 1,
+    //borderWidth: 1,
     borderColor: 'black',
   }
 });
