@@ -82,12 +82,21 @@ export default (state = INITIAL_STATE, action) => {
     case CARD_MOVED:
       const { lane, index, endX } = action.payload;
       const cards = state.lanes[lane].slice(0, index+1);
+      var spliceConfig = [0, index+2];
+      const newTop = state.lanes[lane][index+1];
+      if (newTop !== undefined) {
+        newTop.shown = true;
+        newTop.draggable = true;
+        spliceConfig.push(newTop);
+      }
       const target = Math.floor(endX / (SCREEN_WIDTH / 10));
       if (lane === target) {
         return state;
       }
       return update(state, {lanes: {
-                              [lane]: {$splice: [[0, index+1]]},
+                              [lane]: {
+                                $splice: [spliceConfig],
+                              },
                               [target]: {$unshift: cards}
                             }});
     default:
