@@ -4,12 +4,16 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import reducers from './src/reducers';
 import Board from './src/components/Board';
+import Deck from './src/components/Deck';
 
 export default class App extends React.Component {
   render() {
     return (
       <Provider store={createStore(reducers)}>
-        <Board style={{ flex: 1 }}/>
+        <View style={{ flex: 1 }}>
+          <Deck/>
+          <Board/>
+        </View>
       </Provider>
     );
   }

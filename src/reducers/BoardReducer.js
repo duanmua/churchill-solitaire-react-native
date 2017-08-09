@@ -1,7 +1,7 @@
 import update from 'immutability-helper';
 
 import {
-  CARD_MOVED
+  CARD_MOVED, DECK_TAPPED
 } from '../actions/types';
 
 import {
@@ -30,16 +30,18 @@ const shuffle = (array) => {
 
 const populate = (board) => {
   var i = 0;
-  [SPADES, HEARTS, DIAMONDS, CLUBS].forEach((suit) => {
-    ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'].forEach((value) => {
-      board.deck.push({
-        id: i,
-        value: value,
-        suit: suit,
-        color: suit === SPADES || suit === CLUBS ? BLACK : RED,
-        shown: false,
-        draggable: false
-      })
+  Array(2).fill().forEach(() => {
+    [SPADES, HEARTS, DIAMONDS, CLUBS].forEach((suit) => {
+      ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'].forEach((value) => {
+        board.deck.push({
+          id: i,
+          value: value,
+          suit: suit,
+          color: suit === SPADES || suit === CLUBS ? BLACK : RED,
+          shown: false,
+          draggable: false
+        })
+      });
     });
   });
 };
@@ -81,7 +83,7 @@ export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case CARD_MOVED:
       const { lane, index, endX } = action.payload;
-      const cards = state.lanes[lane].slice(0, index+1);
+      var cards = state.lanes[lane].slice(0, index+1);
       var spliceConfig = [0, index+2];
       const newTop = state.lanes[lane][index+1];
       if (newTop !== undefined) {
@@ -99,6 +101,22 @@ export default (state = INITIAL_STATE, action) => {
                               },
                               [target]: {$unshift: cards}
                             }});
+    case DECK_TAPPED:
+      var cards = state.deck.slice(0, 10);
+      return update(state, {
+        lanes: {$apply: function(val) {
+          return val.map((lane) => {
+            var card = cards.shift();
+            if (card === undefined) {
+              return lane;
+            }
+            card.shown = true;
+            card.draggable = true;
+            return [card, ...lane];
+          });
+        }},
+        deck: {$splice: [[0,10]]}
+      });
     default:
       return state;
   }

@@ -1,5 +1,5 @@
 import {
-  CARD_MOVED
+  CARD_MOVED, DECK_TAPPED
 } from '../actions/types';
 
 export const cardMoved = ({
@@ -19,5 +19,11 @@ export const cardMoved = ({
       lane,
       index
     }
+  };
+};
+
+export const deckTapped = () => {
+  return {
+    type: DECK_TAPPED
   };
 };
