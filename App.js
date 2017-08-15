@@ -10,8 +10,12 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={createStore(reducers)}>
-        <View style={{ flex: 1, backgroundColor: 'skyblue' }}>
-          <Deck/>
+        <View style={{ flex: 1, backgroundColor: 'skyblue', top: 20 }}>
+          <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+            <Deck style={{ flex: 1 }}/>
+            <View  style={{ flex: 8, height: 20 }}/>
+            <View style={{ flex: 1, backgroundColor: 'red', height: 20}} />
+          </View>
           <Board/>
         </View>
       </Provider>

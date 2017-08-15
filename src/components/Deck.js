@@ -16,11 +16,9 @@ class Deck extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    width: 30,
     height: 20,
     backgroundColor: 'red',
-    color: 'green',
-    top: 20,
+    color: 'green'
   }
 });
 

@@ -51,7 +51,7 @@ class Board extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 10,
     backgroundColor: 'skyblue',
     top: 20,
     justifyContent: 'space-around',
