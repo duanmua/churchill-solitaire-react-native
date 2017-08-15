@@ -5,3 +5,5 @@ export const CLUBS = '♣';
 
 export const BLACK = 'black';
 export const RED = 'red';
+
+export const CARD_SUITS = [SPADES, HEARTS, DIAMONDS, CLUBS];

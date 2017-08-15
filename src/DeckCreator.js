@@ -4,22 +4,23 @@ import {
   DIAMONDS,
   CLUBS,
   BLACK,
-  RED
+  RED,
+  CARD_SUITS
 } from './CardTypes';
 
 export const CARD_VALUES = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
-export const CARD_SUITS = [SPADES, HEARTS, DIAMONDS, CLUBS];
+
 export const INITIAL_GOAL = (() => {
   var goal = {};
   CARD_SUITS.forEach((suit) => {
     goal[suit] = [
       {
         next: 'A',
-        topCard: {}
+        topCard: null
       },
       {
         next: 'A',
-        topCard: {}
+        topCard: null
       }
     ];
   });

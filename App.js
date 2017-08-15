@@ -5,6 +5,7 @@ import { createStore } from 'redux';
 import reducers from './src/reducers';
 import Board from './src/components/Board';
 import Deck from './src/components/Deck';
+import Goal from './src/components/Goal';
 
 export default class App extends React.Component {
   render() {
@@ -14,7 +15,7 @@ export default class App extends React.Component {
           <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
             <Deck style={{ flex: 1 }}/>
             <View  style={{ flex: 8, height: 20 }}/>
-            <View style={{ flex: 1, backgroundColor: 'red', height: 20}} />
+            <Goal style={{ flex: 8 }} />
           </View>
           <Board/>
         </View>
