@@ -8,6 +8,23 @@ import {
 } from './CardTypes';
 
 export const CARD_VALUES = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+export const CARD_SUITS = [SPADES, HEARTS, DIAMONDS, CLUBS];
+export const INITIAL_GOAL = (() => {
+  var goal = {};
+  CARD_SUITS.forEach((suit) => {
+    goal[suit] = [
+      {
+        next: 'A',
+        topCard: {}
+      },
+      {
+        next: 'A',
+        topCard: {}
+      }
+    ];
+  });
+  return goal;
+})();
 
 export const shuffle = (array) => {
   var i = 0

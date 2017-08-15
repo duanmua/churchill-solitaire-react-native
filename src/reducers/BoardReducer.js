@@ -13,7 +13,7 @@ import {
   RED
 } from '../CardTypes';
 
-import { CARD_VALUES, shuffle, populate, dealLaneOfDepth, dealLanes } from '../DeckCreator';
+import { CARD_VALUES, INITIAL_GOAL, shuffle, populate, dealLaneOfDepth, dealLanes } from '../DeckCreator';
 
 import { SCREEN_WIDTH } from '../LayoutConstants';
 
@@ -24,6 +24,7 @@ const INITIAL_STATE = (() => {
   populate(board);
   shuffle(board.deck);
   board.lanes = dealLanes(board);
+  board.goal = INITIAL_GOAL;
   return board;
 })();
 
@@ -47,24 +48,79 @@ const canMove = (cards, target) => {
   }
 };
 
+const goalUpdate = (state, cards) => {
+  if (cards.length > 1) {
+    return {
+      valid: false
+    };
+  }
+  let card = cards[0];
+  //state.goal[card.suit].forEach((slot) => {
+  //});
+  if (state.goal[card.suit][0].next === card.value) {
+    return {
+      valid: true,
+      update: {
+        [card.suit]: {
+          [0]: {
+            $set: {
+              next: '2',
+              topCard: card
+            }
+          }
+        }
+      }
+    };
+  }
+  if (state.goal[card.suit][1].next === card.value) {
+    return {
+      valid: true,
+      update: {
+        [card.suit]: {
+          [1]: {
+            $set: {
+              next: '2',
+              topCard: card
+            }
+          }
+        }
+      }
+    };
+  }
+  return {
+    valid: false
+  };
+}
+
 const cardMoved = (state, payload) => {
-  const { lane, index, endX } = payload;
+  const { lane, index, endX, endY } = payload;
 
   var cards = state.lanes[lane].slice(0, index+1);
-
   var spliceConfig = [0, index+2];
+  const newTop = state.lanes[lane][index+1];
 
+  if (newTop !== undefined) {
+    newTop.shown = true;
+    newTop.draggable = true;
+    spliceConfig.push(newTop);
+  }
   const target = Math.floor(endX / (SCREEN_WIDTH / 10));
 
-  if (canMove(cards, state.lanes[target])) {
-    const newTop = state.lanes[lane][index+1];
-
-    if (newTop !== undefined) {
-      newTop.shown = true;
-      newTop.draggable = true;
-      spliceConfig.push(newTop);
+  if (endY < 60) {
+    var goalChange = goalUpdate(state, cards);
+    if (goalChange.valid) {
+      return update(state, {
+                      lanes: {
+                        [lane]: {
+                          $splice: [spliceConfig],
+                        }
+                      },
+                      goal: goalChange.update
+                    });
     }
+  }
 
+  if (canMove(cards, state.lanes[target])) {
     return update(state, {lanes: {
                             [lane]: {
                               $splice: [spliceConfig],
