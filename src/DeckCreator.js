@@ -5,20 +5,21 @@ import {
   CLUBS,
   BLACK,
   RED,
-  CARD_SUITS
+  CARD_SUITS,
+  CARD_VALUES
 } from './CardTypes';
-
-export const CARD_VALUES = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 
 export const INITIAL_GOAL = (() => {
   var goal = {};
   CARD_SUITS.forEach((suit) => {
     goal[suit] = [
       {
+        id: suit + '1',
         next: 'A',
         topCard: null
       },
       {
+        id: suit + '2',
         next: 'A',
         topCard: null
       }

@@ -48,7 +48,7 @@ class Card extends Component {
         <Text
           style={ {display, color, ...styles.text} }
         >
-          {value} {suit}
+          {value.value} {suit}
         </Text>
       </View>
     );

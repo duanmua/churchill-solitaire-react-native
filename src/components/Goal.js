@@ -10,20 +10,23 @@ class Goal extends React.Component {
     console.log(slot);
     if (slot.topCard === null) {
       return (
-        <View style={{ flex: 1 }} />
+        <View key={slot.id} style={{ flex: 1 }} />
       );
     }
     return (
-      <Card
-        key={ slot.topCard.id }
-        cardMoved={ this.props.cardMoved }
-        cardId={ slot.topCard.id }
-        value={ slot.topCard.value }
-        suit={ slot.topCard.suit }
-        color={ slot.topCard.color }
-        shown={ true }
-        draggable={ false }
-      />
+      <View key={slot.id} style={{ flex: 1 }}>
+        <Card
+          key={ slot.topCard.id }
+          cardMoved={ this.props.cardMoved }
+          cardId={ slot.topCard.id }
+          value={ slot.topCard.value }
+          suit={ slot.topCard.suit }
+          color={ slot.topCard.color }
+          shown={ true }
+          draggable={ false }
+          flex={ true }
+        />
+      </View>
     );
   }
 
@@ -44,7 +47,7 @@ class Goal extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 8,
     backgroundColor: 'blue',
     top: 20,
     height: 50,

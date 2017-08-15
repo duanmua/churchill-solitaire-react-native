@@ -36,14 +36,14 @@ const canMove = (cards, target) => {
   }
   let top = cards[cards.length-1];
   if (target.length === 0) {
-    return top.value === 'K';
+    return top.value.value === 'K';
   }
   let bottom = target[0];
 
   if (top.color === bottom.color) {
     return false;
   }
-  if (top.value === CARD_VALUES[CARD_VALUES.indexOf(bottom.value)-1]) {
+  if (top.value.value === bottom.value.previous) {
     return true;
   }
 };
@@ -57,39 +57,28 @@ const goalUpdate = (state, cards) => {
   let card = cards[0];
   //state.goal[card.suit].forEach((slot) => {
   //});
-  if (state.goal[card.suit][0].next === card.value) {
-    return {
-      valid: true,
-      update: {
-        [card.suit]: {
-          [0]: {
-            $set: {
-              next: '2',
-              topCard: card
-            }
-          }
-        }
-      }
-    };
-  }
-  if (state.goal[card.suit][1].next === card.value) {
-    return {
-      valid: true,
-      update: {
-        [card.suit]: {
-          [1]: {
-            $set: {
-              next: '2',
-              topCard: card
-            }
-          }
-        }
-      }
-    };
-  }
-  return {
+  var updates = {
     valid: false
   };
+  [0, 1].forEach((val) => {
+    if (state.goal[card.suit][val].next === card.value.value) {
+      updates = {
+        valid: true,
+        update: {
+          [card.suit]: {
+            [val]: {
+              $merge: {
+                next: card.value.next,
+                topCard: card
+              }
+            }
+          }
+        }
+      };
+    }
+  });
+
+  return updates;
 }
 
 const cardMoved = (state, payload) => {
