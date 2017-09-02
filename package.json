@@ -8,6 +8,9 @@
   "scripts": {
     "test": "jest"
   },
+  "jest": {
+    "preset": "react-native"
+  },
   "dependencies": {
     "expo": "^18.0.4",
     "immutability-helper": "^2.3.0",
