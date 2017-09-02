@@ -7,7 +7,6 @@ import { CARD_SUITS } from '../CardTypes';
 
 class Goal extends React.Component {
   getGoalSlot(slot, lane) {
-    console.log(slot);
     if (slot.topCard === null) {
       return (
         <View key={slot.id} style={{ flex: 1 }} />
