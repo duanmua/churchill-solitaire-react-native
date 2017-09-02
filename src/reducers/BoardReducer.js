@@ -4,27 +4,20 @@ import {
   CARD_MOVED, DECK_TAPPED
 } from '../actions/types';
 
-import {
-  SPADES,
-  HEARTS,
-  DIAMONDS,
-  CLUBS,
-  BLACK,
-  RED
-} from '../CardTypes';
-
-import { CARD_VALUES, INITIAL_GOAL, shuffle, populate, dealLaneOfDepth, dealLanes } from '../DeckCreator';
+import { INITIAL_GOAL,
+         shuffle,
+         freshDeck,
+         dealLanes } from '../DeckCreator';
 
 import { SCREEN_WIDTH } from '../LayoutConstants';
 
 
 const INITIAL_STATE = (() => {
   var board = {};
-  board.deck = [];
-  populate(board);
-  shuffle(board.deck);
-  board.lanes = dealLanes(board);
   board.goal = INITIAL_GOAL;
+  board.deck = freshDeck();
+  shuffle(board.deck);
+  board.lanes = dealLanes(board.deck);
   return board;
 })();
 

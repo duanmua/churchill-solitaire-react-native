@@ -41,12 +41,13 @@ export const shuffle = (array) => {
   }
 };
 
-export const populate = (board) => {
+export const freshDeck = () => {
+  var deck = [];
   var i = 0;
   Array(2).fill().forEach(() => {
     [SPADES, HEARTS, DIAMONDS, CLUBS].forEach((suit) => {
       CARD_VALUES.forEach((value) => {
-        board.deck.push({
+        deck.push({
           id: i,
           value: value,
           suit: suit,
@@ -57,6 +58,7 @@ export const populate = (board) => {
       });
     });
   });
+  return deck;
 };
 
 export const dealLaneOfDepth = (num, deck) => {
@@ -70,13 +72,13 @@ export const dealLaneOfDepth = (num, deck) => {
   });
 };
 
-export const dealLanes = (board) => {
+export const dealLanes = (deck) => {
   var lanes = [];
   for (i = 1; i<=5; i++) {
-    lanes.push(dealLaneOfDepth(i, board.deck));
+    lanes.push(dealLaneOfDepth(i, deck));
   }
   for (j = 5; j>0; j--) {
-    lanes.push(dealLaneOfDepth(j, board.deck));
+    lanes.push(dealLaneOfDepth(j, deck));
   }
   return lanes;
 };
