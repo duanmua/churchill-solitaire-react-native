@@ -54,7 +54,8 @@ export const freshDeck = () => {
           color: suit === SPADES || suit === CLUBS ? BLACK : RED,
           shown: false,
           draggable: false
-        })
+        });
+        i += 1;
       });
     });
   });
