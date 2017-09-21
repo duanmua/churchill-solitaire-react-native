@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`creates a cardMoved action 1`] = `
+Object {
+  "payload": Object {
+    "cardId": 20,
+    "endX": 20,
+    "endY": 100,
+    "index": 2,
+    "lane": 1,
+  },
+  "type": "card_moved",
+}
+`;
+
+exports[`creates a deckTapped action 1`] = `
+Object {
+  "type": "deck_tapped",
+}
+`;
