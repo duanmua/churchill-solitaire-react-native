@@ -10,6 +10,11 @@ it('handles DECK_TAPPED action', () => {
   expect(BoardReducer(initialState, deckTapped())).toMatchSnapshot();
 });
 
+// Card moved to goal
+// Card moved to another lane
+// Stacked cards moved to another lane
+// Move King to empty slot
+// Invalid lane
 /*
 it('handles CARD_MOVED action', () => {
   //const error = new Error('Look ma! I am an error');
