@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Animated, PanResponder, Text } from 'react-native';
+import { SCREEN_WIDTH, CARD_HEIGHT, CARD_OFFSET } from '../LayoutConstants';
 
 class Card extends Component {
   constructor(props) {
@@ -61,7 +62,7 @@ class Card extends Component {
         style={this.position.getLayout()}
       >
         {this.getCardView()}
-        <View style={{ top: -45 }}>
+        <View style={{ top: CARD_OFFSET }}>
           {this.props.children}
         </View>
 
@@ -72,7 +73,7 @@ class Card extends Component {
 
 const styles = {
   card: {
-    height: 60,
+    height: CARD_HEIGHT,
     borderRadius: 3,
     borderWidth: 1,
     borderColor: 'black'
