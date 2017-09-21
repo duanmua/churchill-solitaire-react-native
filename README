@@ -1,3 +1,11 @@
+# Churchill Solitaire React Native
+
+[Inspired by the app](http://churchillsolitaire.com)
+
+This project was created because I wanted to become more familiar with React Native, and I find the existing Churchill Solitaire app UX to be frustrating.
+
+### Implementation/Scratch Notes
+
 10 lanes
 Lane State:
   * Array of array of objects:
