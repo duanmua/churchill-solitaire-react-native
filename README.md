@@ -2,7 +2,7 @@
 
 [Inspired by the app](http://churchillsolitaire.com)
 
-This project was created because I wanted to become more familiar with React Native, and I find the existing Churchill Solitaire app UX to be frustrating.
+This project was created because I wanted to become more familiar with React Native, and I find the existing Churchill Solitaire app UX (locked rotation) and in-app purchase cost of undos to be frustrating.
 
 ### Differences From Regular Solitaire
 * 2 Decks
@@ -16,3 +16,8 @@ This project was created because I wanted to become more familiar with React Nat
 
 ### TODO
 * Info on project setup & running the tests
+* Improve UI assets immensely
+* Undo using [redux-undo](https://github.com/omnidan/redux-undo)
+* Menus
+* Scoring
+* Guaranteed solvable deals
