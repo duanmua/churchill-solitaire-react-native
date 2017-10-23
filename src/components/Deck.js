@@ -8,7 +8,7 @@ class Deck extends React.Component {
 
   render() {
     return (
-      <Button style={styles.container} onPress={this.props.deckTapped} title='Deak'/>
+      <Button style={styles.container} onPress={this.props.deckTapped} title='Deal'/>
     );
   }
 }

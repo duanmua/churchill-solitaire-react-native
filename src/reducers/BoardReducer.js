@@ -1,7 +1,7 @@
 import update from 'immutability-helper';
 
 import {
-  CARD_MOVED, DECK_TAPPED
+  CARD_MOVED, DECK_TAPPED, CARD_DRAG_START
 } from '../actions/types';
 
 import { INITIAL_GOAL,
@@ -92,6 +92,7 @@ const cardMoved = (state, payload) => {
     var goalChange = goalUpdate(state, cards);
     if (goalChange.valid) {
       return update(state, {
+                      activeLane: {$set: null},
                       lanes: {
                         [lane]: {
                           $splice: [spliceConfig],
@@ -103,21 +104,23 @@ const cardMoved = (state, payload) => {
   }
 
   if (canMove(cards, state.lanes[target])) {
-    return update(state, {lanes: {
+    return update(state, {activeLane: {$set: null},
+                          lanes: {
                             [lane]: {
                               $splice: [spliceConfig],
                             },
                             [target]: {$unshift: cards}
                           }});
   }
-  return state;
+  return update(state, {activeLane: {$set: null}});
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case CARD_MOVED:
       return cardMoved(state, action.payload);
-
+    case CARD_DRAG_START:
+      return update(state, {activeLane: {$set: action.payload.lane}});
     case DECK_TAPPED:
       var cards = state.deck.slice(0, 10);
       return update(state, {

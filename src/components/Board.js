@@ -1,18 +1,23 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
-import { cardMoved } from '../actions';
+import { cardMoved, cardDragStart } from '../actions';
 import Card from './Card';
 
 class Board extends React.Component {
   getLane(cards, lane) {
     var laneJSX = null;
+    console.log(`lane ${lane} ${this.props.activeLane}`);
+    var zIndex = lane === this.props.activeLane ? 9999 : 0;
+
     cards.forEach((card, index) => {
+
       const key = "cardID: " + card.id + " lane: " + lane + " index: " + index;
       laneJSX = (
         <Card
           key={ key }
           cardMoved={ this.props.cardMoved }
+          cardDragStart={ this.props.cardDragStart }
           cardId={ card.id }
           value={ card.value }
           suit={ card.suit }
@@ -27,7 +32,7 @@ class Board extends React.Component {
       );
     })
     return (
-      <View style={{ flexDirection: 'row', flex: 1 }} key={ lane }>
+      <View style={{ flexDirection: 'row', zIndex, flex: 1 }} key={ lane }>
         <View style={{ flex: 1 }} />
         <View style={ styles.lane }>
           { laneJSX }
@@ -69,8 +74,8 @@ const styles = StyleSheet.create({
 // ownProps IS this.props
 // if now key is passed, variable name is used as key
 const mapStateToProps = (state, ownProps) => {
-  const { lanes } = state.board;
-  return { lanes };
+  const { lanes, activeLane } = state.board;
+  return { lanes, activeLane };
 };
 
-export default connect(mapStateToProps, { cardMoved })(Board);
+export default connect(mapStateToProps, { cardMoved, cardDragStart })(Board);

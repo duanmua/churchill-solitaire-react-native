@@ -7,7 +7,7 @@ class Card extends Component {
     super(props);
 
     const position = new Animated.ValueXY();
-    const { cardMoved, cardId, draggable, lane, index } = this.props;
+    const { cardMoved, cardDragStart, cardId, draggable, lane, index } = this.props;
 
     const panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (event, gesture) => {
@@ -17,6 +17,9 @@ class Card extends Component {
       onPanResponderMove: (event, gesture) => {
         position.setValue({ x: gesture.dx, y: gesture.dy });
         //console.log(gesture);
+      },
+      onPanResponderGrant: (event, gesture) => {
+        cardDragStart({lane, index});
       },
       onPanResponderRelease: (event, gesture) => {
         this.resetPosition();

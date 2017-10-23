@@ -1,5 +1,5 @@
 import {
-  CARD_MOVED, DECK_TAPPED
+  CARD_MOVED, DECK_TAPPED, CARD_DRAG_START
 } from '../actions/types';
 
 export const cardMoved = ({
@@ -25,5 +25,12 @@ export const cardMoved = ({
 export const deckTapped = () => {
   return {
     type: DECK_TAPPED
+  };
+};
+
+export const cardDragStart = ({lane, index}) => {
+  return {
+    type: CARD_DRAG_START,
+    payload: {lane, index}
   };
 };
